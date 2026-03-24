@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════
    Flashcards Pro – Traductions FR / ES
 ══════════════════════════════════════ */
-const TRANSLATIONS = {
+var TRANSLATIONS = {
   fr: {
     // Header / nav
     appName: "Flashcards Pro",
@@ -396,3 +396,4 @@ const TRANSLATIONS = {
     streakMsg: "🔥 ¡%s días seguidos! ¡Sigue así!"
   }
 };
+
