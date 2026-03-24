@@ -195,7 +195,7 @@ main{flex:1;max-width:800px;margin:0 auto;width:100%;padding:18px 14px 80px;disp
     <button class="btn bb btn-sm" onclick="askNotif()" id="t-btnActivate"></button>
   </div>
   <div class="daily-bar" id="daily-bar"></div>
-  <div id="home-welcome" class="card welcome-card hidden">
+  <div id="home-welcome" class="card welcome-card">
     <div style="font-size:2.4rem">🎴</div>
     <h2 id="t-welcomeTitle"></h2>
     <p id="t-welcomeDesc"></p>
@@ -833,11 +833,15 @@ function checkWelcome(){if(!localStorage.getItem('fcpro_welcomed')){document.get
 
 
 
-checkWelcome();
-checkURLDeck();
-applyI18n();
-renderSettings();
-goTo('home');
+try {
+  checkWelcome();
+  checkURLDeck();
+  applyI18n();
+  renderSettings();
+  goTo('home');
+} catch(e) {
+  document.body.innerHTML += '<div style="position:fixed;bottom:60px;left:0;right:0;background:#c00;color:#fff;padding:12px;font-size:.8rem;z-index:9999">Erreur JS: ' + e.message + '</div>';
+}
 </script>
 </body>
 </html>
