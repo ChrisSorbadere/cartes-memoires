@@ -523,7 +523,20 @@ function renderHome(){
   document.getElementById('home-decks').classList.toggle('hidden',!hasDecks);
   var banner=document.getElementById('notif-banner');
   if('Notification' in window&&Notification.permission==='default'&&!S.settings.notif){banner.classList.remove('hidden');}else{banner.classList.add('hidden');}
-  if(!hasDecks)return;
+  if(!hasDecks){
+    // Remplir les textes de l'écran de bienvenue
+    var wt=document.getElementById('t-welcomeTitle');
+    var wd=document.getElementById('t-welcomeDesc');
+    var wb=document.getElementById('t-welcomeBtn');
+    var bi=document.getElementById('t-btnImport');
+    var bc=document.getElementById('t-btnCreate');
+    if(wt)wt.textContent=T('welcomeTitle');
+    if(wd)wd.textContent=T('welcomeDesc');
+    if(wb)wb.textContent=T('welcomeBtn');
+    if(bi)bi.textContent=T('btnImport');
+    if(bc)bc.textContent=T('btnCreate');
+    return;
+  }
   var grid=document.getElementById('deck-grid');grid.innerHTML='';
   // Grouper par niveau
   var levels=['A1','A2','B1','B2','C1','C2','STANAG'];
