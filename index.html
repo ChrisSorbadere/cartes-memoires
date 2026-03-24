@@ -833,14 +833,6 @@ function checkWelcome(){if(!localStorage.getItem('fcpro_welcomed')){document.get
 
 
 
-// Verrou simple
-(function(){
-  var CODE='cartes2025', KEY='cm_v2_ok';
-  if(localStorage.getItem(KEY)==='1') return;
-  var v=window.prompt('Cartes mémoires\nEntrez le code d\'accès :','');
-  if(v===CODE){ localStorage.setItem(KEY,'1'); }
-  else { document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#8a5f00;font-size:1.1rem">Code incorrect. Rechargez la page.</div>'; return; }
-})();
 checkWelcome();
 checkURLDeck();
 applyI18n();
