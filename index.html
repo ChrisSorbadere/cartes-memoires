@@ -182,59 +182,7 @@ main{flex:1;max-width:800px;margin:0 auto;width:100%;padding:18px 14px 80px;disp
 .hidden{display:none!important;}
 @media(max-width:400px){.choices{grid-template-columns:1fr;}.global-card{flex-direction:column;}.daily-bar{flex-direction:column;}}
 </style>
-<script>
-// Verrou d'accès — s'exécute immédiatement
-(function(){
-  var CODE = 'cartes2025';
-  var KEY  = 'cm_v2_ok';
-  if(localStorage.getItem(KEY) === '1') return; // déjà autorisé
-  // Bloquer le body jusqu'à validation
-  document.addEventListener('DOMContentLoaded', function(){
-    var overlay = document.createElement('div');
-    overlay.id = 'lock-overlay';
-    overlay.style.cssText = [
-      'position:fixed','inset:0','background:#f0ede4',
-      'z-index:999999','display:flex','flex-direction:column',
-      'align-items:center','justify-content:center','gap:18px',
-      'padding:32px','font-family:Arial,sans-serif'
-    ].join(';');
-    overlay.innerHTML = [
-      '<div style="font-size:2.8rem">🎴</div>',
-      '<div style="font-size:1.3rem;font-weight:700;color:#8a5f00">Cartes mémoires</div>',
-      '<div style="font-size:.95rem;color:#444">Code d'accès requis</div>',
-      '<input id="lk-inp" type="password" placeholder="Entrez le code"',
-      '  style="font-size:1.1rem;padding:12px 18px;border:2px solid #8a5f00;',
-      '  border-radius:10px;width:240px;text-align:center;outline:none;',
-      '  background:#fff;color:#111;box-sizing:border-box"/>',
-      '<button id="lk-btn"',
-      '  style="font-size:1rem;font-weight:700;padding:13px 36px;',
-      '  background:#8a5f00;color:#fff;border:none;border-radius:10px;',
-      '  cursor:pointer;width:240px;box-sizing:border-box">',
-      '  Entrer ➜</button>',
-      '<div id="lk-err" style="color:#c00;font-size:.9rem;min-height:1.2em"></div>'
-    ].join('');
-    document.body.appendChild(overlay);
-    
-    function tryUnlock(){
-      var v = document.getElementById('lk-inp').value;
-      if(v === CODE){
-        localStorage.setItem(KEY, '1');
-        overlay.remove();
-      } else {
-        document.getElementById('lk-err').textContent = 'Code incorrect.';
-        document.getElementById('lk-inp').value = '';
-        setTimeout(function(){ document.getElementById('lk-err').textContent=''; }, 2500);
-      }
-    }
-    
-    document.getElementById('lk-btn').addEventListener('click', tryUnlock);
-    document.getElementById('lk-inp').addEventListener('keydown', function(e){
-      if(e.key === 'Enter') tryUnlock();
-    });
-    setTimeout(function(){ document.getElementById('lk-inp').focus(); }, 200);
-  });
-})();
-</script>
+
 </head>
 <body>
 
@@ -885,6 +833,14 @@ function checkWelcome(){if(!localStorage.getItem('fcpro_welcomed')){document.get
 
 
 
+// Verrou simple
+(function(){
+  var CODE='cartes2025', KEY='cm_v2_ok';
+  if(localStorage.getItem(KEY)==='1') return;
+  var v=window.prompt('Cartes mémoires\nEntrez le code d\'accès :','');
+  if(v===CODE){ localStorage.setItem(KEY,'1'); }
+  else { document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#8a5f00;font-size:1.1rem">Code incorrect. Rechargez la page.</div>'; return; }
+})();
 checkWelcome();
 checkURLDeck();
 applyI18n();
