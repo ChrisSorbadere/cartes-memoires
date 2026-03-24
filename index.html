@@ -1246,15 +1246,11 @@ function checkWelcome(){if(!localStorage.getItem('fcpro_welcomed')){document.get
 
 
 
-try {
-  checkWelcome();
-  checkURLDeck();
-  applyI18n();
-  renderSettings();
-  goTo('home');
-} catch(e) {
-  document.body.innerHTML += '<div style="position:fixed;bottom:60px;left:0;right:0;background:#c00;color:#fff;padding:12px;font-size:.8rem;z-index:9999">Erreur JS: ' + e.message + '</div>';
-}
+checkWelcome();
+checkURLDeck();
+applyI18n();
+renderSettings();
+goTo('home');
 </script>
 </body>
 </html>
